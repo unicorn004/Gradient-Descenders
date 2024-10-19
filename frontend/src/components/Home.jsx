@@ -106,11 +106,12 @@ const Home = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8000/api/restaurantdata/', restaurantData);
-      await axios.post('http://localhost:8000/api/restauranttransactions/', transactionData);
+      await axios.post('http://localhost:8000/api/restaurant-data/', restaurantData);
+      await axios.post('http://localhost:8000/api/restaurant-transactions/', transactionData);
       alert('Data submitted successfully');
     } catch (error) {
       console.error('There was an error submitting the data!', error);
+      alert('Error submitting data. Please try again.');
     }
   };
 

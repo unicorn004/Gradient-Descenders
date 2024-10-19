@@ -21,7 +21,7 @@ from django.http import JsonResponse
 # def signup(request):
 #     return render(request, 'SignUp.html')
 
-# def figure(request):
+def figure(request):
     np.random.seed(9615)
 
     N = 100
