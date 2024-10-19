@@ -1,22 +1,4 @@
 from django.shortcuts import render
-
-# Create your views here.
-from django.shortcuts import render
-
-import numpy as np
-
-import pandas as pd
-
-import matplotlib.pyplot as plt
-
-import mpld3
-
-from django.http import JsonResponse
-
-
-def home_view(request):
-    return render(request, 'Home.html')
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -24,6 +6,10 @@ import mpld3
 from django.shortcuts import render
 import plotly.graph_objs as go
 import plotly.io as pio
+from django.http import JsonResponse
+
+def home_view(request):
+    return render(request, 'Home.html')
 
 # def figure(request):
 #     np.random.seed(9615)
