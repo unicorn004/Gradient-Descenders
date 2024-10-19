@@ -15,11 +15,11 @@ from django.http import JsonResponse
 def home_view(request):
     return render(request, 'Home.html')
 
-def signin(request):
-    return render(request, 'Signin.html')
+# def signin(request):
+#     return render(request, 'Signin.html')
 
-def signup(request):
-    return render(request, 'Signup.html')
+# def signup(request):
+#     return render(request, 'SignUp.html')
 
 def figure(request):
     np.random.seed(9615)
