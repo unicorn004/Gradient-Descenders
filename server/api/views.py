@@ -12,8 +12,8 @@ import plotly.io as pio
 from django.http import JsonResponse
 
 
-def home_view(request):
-    return JsonResponse({"title": "Home"})
+# def home_view(request):
+#     return JsonResponse({"title": "Home"})
 
 # def signin(request):
 #     return render(request, 'Signin.html')
