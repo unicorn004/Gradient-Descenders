@@ -1,6 +1,6 @@
-from .views import home_view
-from django.urls import path
+from django.urls import path, include
 
 urlpatterns = [
-    # path('', home_view, name='home'),
+    # Include the inputs app URLs under the /api/ path
+    path('api/', include('inputs.urls')),
 ]
