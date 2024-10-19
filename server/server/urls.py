@@ -22,7 +22,7 @@ from inputs.views import RestaurantSalesViewSet,RestraurantTransactionsViewSet
 
 router = routers.DefaultRouter()
 router.register('restaurant-data', RestaurantSalesViewSet),
-router.register('restaurant-transactions', RestraurantTransactionsViewSet),
+router.register('restaurant-transactions', RestraurantTransactionsViewSet,basename='unique_basename'),
 
 
 
