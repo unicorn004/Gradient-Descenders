@@ -1,9 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { signup } from "../actions/projectActions";
 import { Link, useNavigate } from "react-router-dom";
-
 
 const SignUp = () => {
     const [formData, setFormData] = useState({
@@ -13,47 +10,63 @@ const SignUp = () => {
         password2: '',
     });
 
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [userInfo, setUserInfo] = useState(null);
+
     const { name, email, password, password2 } = formData;
 
-    const dispatch = useDispatch();
-    const userSignup = useSelector((state) => state.userSignup) || {};
-    const { loading, error, userInfo } = userSignup;
-
-    const navigate = useNavigate(); // useNavigate hook from react-router-dom to navigate to a new page when signup is successful
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (userInfo) {
-            // Handle successful signup (e.g., redirect to a different page)
             alert('Signup successful');
             console.log('Signup successful', userInfo);
+            navigate('/signin');
         }
-    }, [userInfo]);
+    }, [userInfo, navigate]);
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-    const onSubmit = e => {
+    const onSubmit = async e => {
         e.preventDefault();
 
-        // form validation
         if (password !== password2) {
             alert('Passwords do not match');
             return;
         } else {
-            // signup logic here
-            dispatch(signup(name, email, password,password2));
-            console.log('Signup successful');
+            setLoading(true);
+            try {
+                const response = await fetch('http://127.0.0.1:8000/signup/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, email, password,password2 })
+                });
 
+                if (!response.ok) {
+                    throw new Error('Signup failed');
+                }
+
+                const data = await response.json();
+                setUserInfo(data);
+                console.log('Signup successful', data);
+            } catch (error) {
+                setError(error.message);
+                console.error('Error:', error);
+            } finally {
+                setLoading(false);
+            }
         }
-
-        navigate('/signin')
     };
 
     return (
         <div className="mt-20 w-1/2 h-96px mx-auto">
             <div>
                 <h2 className="text-center text-3xl font-bold text-gray-900 dark:text-white mb-5">Sign Up</h2>
-                {/* {error && <div className="alert alert-danger">{error}</div>}
-                {loading && <div>Loading...</div>} */}
+                {error && <div className="alert alert-danger">{error}</div>}
+                {loading && <div>Loading...</div>}
                 <form className="max-w-md mx-auto" onSubmit={e => onSubmit(e)}>
                     <div className="relative z-0 w-full mb-5 group">
                         <input
@@ -125,7 +138,7 @@ const SignUp = () => {
                         Submit
                     </button>
                     <p className="mt-5 text-blue-500 text-sm">
-                         <Link to={"/signin"}>Already have an account?, LogIn</Link>
+                        <Link to={"/signin"}>Already have an account? Log In</Link>
                     </p>
                 </form>
             </div>
