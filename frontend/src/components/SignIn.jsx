@@ -32,7 +32,7 @@ const SignIn = () => {
             const data = await response.json();
             setUserInfo(data);
             localStorage.setItem('userInfo', JSON.stringify(data));
-            navigate('/');
+            navigate('/NewNavBar');
         } catch (error) {
             setError(error.message);
         } finally {

@@ -1,4 +1,4 @@
-import React from 'react'
+//import React from 'react'
 import SignUp from './components/SignUp'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar';
