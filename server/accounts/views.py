@@ -1,32 +1,70 @@
-from django.views.decorators.csrf import csrf_protect
-from django.http import JsonResponse
-from django.shortcuts import render
+from django.views.decorators.csrf import csrf_protect,csrf_exempt
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny,IsAuthenticated,IsAdminUser
+from rest_framework.response import Response
 from django.contrib.auth import get_user_model
-from django.contrib import messages
-import requests
+from rest_framework.views import APIView
+from .serializers import UserSerializer
 
 User = get_user_model()
 
-@csrf_protect
-def signup_template_view(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        password1 = request.POST.get('password1')
-        password2 = request.POST.get('password2')
 
-        if not name or not email or not password1 or not password2:
-            messages.error(request, 'All fields are required')
-        elif password1 != password2:
-            messages.error(request, 'Passwords do not match')
-        elif len(password1) < 6:
-            messages.error(request, 'Password must be at least 6 characters')
-        elif User.objects.filter(email=email).exists():
-            messages.error(request, 'Email already exists')
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def SignupView(request):
+    data = request.data
+
+    name = data.get('name')
+    email = data.get('email')
+    password = data.get('password')
+    password2 = data.get('password2')
+
+    if not name or not email or not password or not password2:
+        return Response({'error': 'All fields are required'}, status=400)
+
+    if password == password2:
+        if User.objects.filter(email=email).exists():
+            return Response({'error': 'Email already exists'}, status=400)
         else:
-            user = User.objects.create_user(email=email, password=password1, name=name)
-            user.save()
-            messages.success(request, 'User created successfully')
-            # return redirect('signin')  # Redirect to the signin page after successful signup
+            if len(password) < 6:
+                return Response({'error': 'Password must be at least 6 characters'}, status=400)
+            else:
+                user = User.objects.create_user(email=email, password=password, name=name)
+                user.save()
+                return Response({'success': 'User created successfully'}, status=201)
+    else:
+        return Response({'error': 'Passwords do not match'}, status=400)
 
-    return render(request, 'SignUp.html')
+class UserDetailView(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request, pk=None, email=None):
+        if pk:
+            try:
+                user = User.objects.get(id=pk)
+            except User.DoesNotExist:
+                return Response({'error': 'User not found'}, status=404)
+        elif email:
+            try:
+                user = User.objects.get(email=email)
+            except User.DoesNotExist:
+                return Response({'error': 'User not found'}, status=404)
+        else:
+            return Response({'error': 'User ID or Email must be provided'}, status=400)
+
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+    
+class UserListView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)
+    
+
+        
+    
+
+

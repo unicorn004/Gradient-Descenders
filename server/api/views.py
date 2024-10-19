@@ -13,7 +13,7 @@ from django.http import JsonResponse
 
 
 def home_view(request):
-    return render(request, 'Home.html')
+    return JsonResponse({"title": "Home"})
 
 # def signin(request):
 #     return render(request, 'Signin.html')
@@ -21,7 +21,7 @@ def home_view(request):
 # def signup(request):
 #     return render(request, 'SignUp.html')
 
-def figure(request):
+# def figure(request):
     np.random.seed(9615)
 
     N = 100
