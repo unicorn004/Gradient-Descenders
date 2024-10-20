@@ -10,9 +10,9 @@ import SalesForecastTable from './components/SalesForecastTable';
 
 const App = () => {
   return (
-    <div>
+    <div >
       <BrowserRouter>
-      <NavBar />
+      <NavBar  />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />

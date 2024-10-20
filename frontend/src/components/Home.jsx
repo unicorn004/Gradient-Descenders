@@ -954,10 +954,13 @@ const Home = () => {
     //   <button type="submit">Submit</button>
     // </form>
     // </div>
-    <div className='flex justify-around gap-20 mx-20 mt-10'>
-      <Card1 />
-      <Card2 />
-    </div >
+    <div className="bg-[url('https://t4.ftcdn.net/jpg/05/51/93/35/360_F_551933523_nBWNQeC6vA8sDE6DDDQeo3YmSRQnlOjN.jpg')] bg-cover bg-center h-screen w-screen flex">
+      <div className="flex justify-around gap-20 mx-20 mt-10">
+        <Card1 />
+        <Card2 />
+      </div >
+    </div>
+
   );
 };
 
