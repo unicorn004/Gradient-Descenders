@@ -105,7 +105,7 @@ const Home = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  /*const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.post('http://localhost:8000/api/restaurant-data/', restaurantData);
@@ -115,7 +115,26 @@ const Home = () => {
       console.error('There was an error submitting the data!', error);
       alert('Error submitting data. Please try again.');
     }
+  }; */
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    try {
+      const { created_date, last_settlement_date } = transactionData;
+  
+      const reinforcementData = {
+        start_date: created_date,
+        end_date: last_settlement_date,
+      };
+  
+      await axios.post('http://localhost:8000/api/reinforcementdata/', reinforcementData);
+  
+      alert('Data submitted successfully');
+    } catch (error) {
+      console.error('There was an error submitting the data!', error);
+    }
   };
+  
 
   return (
     <div style={{ padding: '20px', maxWidth: '600px', margin: 'auto' }}>

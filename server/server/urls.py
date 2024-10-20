@@ -17,13 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
-from inputs.views import RestaurantSalesViewSet,RestraurantTransactionsViewSet
+from inputs.views import RestaurantSalesViewSet,RestraurantTransactionsViewSet,ReinforcementDataViewSet
 
 
 router = routers.DefaultRouter()
 router.register('restaurant-data', RestaurantSalesViewSet),
 router.register('restaurant-transactions', RestraurantTransactionsViewSet,basename='unique_basename'),
-
+router.register('reinforcementdata', ReinforcementDataViewSet, basename='reinforcementdata')
 
 
 urlpatterns = [
