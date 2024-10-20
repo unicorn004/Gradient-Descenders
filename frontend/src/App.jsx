@@ -6,6 +6,7 @@ import Home from './components/Home';
 import SignIn from './components/SignIn';
 import SalesPredictionForm from './components/SalesPredictionForm ';
 import CommodityTable from './components/CommodityTable';
+import SalesForecastTable from './components/SalesForecastTable';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/salesPrediction" element={<SalesPredictionForm />} />
           <Route path="/dashboardForecast" element={<CommodityTable />} />
+          <Route path="/dashboardForecastSales" element={<SalesForecastTable />} />
         </Routes>
       </BrowserRouter> 
     </div>

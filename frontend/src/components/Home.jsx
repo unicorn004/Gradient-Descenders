@@ -954,8 +954,9 @@ const Home = () => {
     //   <button type="submit">Submit</button>
     // </form>
     // </div>
-    <div className='flex justify-between mx-20 mt-10'>
+    <div className='flex justify-around gap-20 mx-20 mt-10'>
       <Card1 />
+      <Card2 />
     </div >
   );
 };
