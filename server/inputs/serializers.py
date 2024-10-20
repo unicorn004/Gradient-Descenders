@@ -1,6 +1,6 @@
 # serializers.py
 from rest_framework import serializers
-from .models import RestaurantData,RestraurantTransaction
+from .models import RestaurantData,RestraurantTransaction,ReinforcementData
 
 class RestaurantSalesSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,4 +11,9 @@ class RestaurantSalesSerializer(serializers.ModelSerializer):
 class RestraurantTransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = RestraurantTransaction
-        fields = '__all__'  
+        fields = '__all__' 
+
+class ReinforcementDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReinforcementData
+        fields = ['start_date', 'end_date']

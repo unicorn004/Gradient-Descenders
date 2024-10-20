@@ -110,3 +110,10 @@ class RestraurantTransaction(models.Model):
     # def _str_(self):
     #     return f'Transaction {self.order_id} - {self.order_status}'
 
+class ReinforcementData(models.Model):
+    start_date = models.DateField()
+    end_date = models.DateField()
+
+    def __str__(self):
+        return f"Reinforcement Data from {self.start_date} to {self.end_date}"
+
