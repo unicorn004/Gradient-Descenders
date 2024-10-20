@@ -37,7 +37,7 @@ def SignupView(request):
         return Response({'error': 'Passwords do not match'}, status=400)
 
 class UserDetailView(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     def get(self, request, pk=None, email=None):
         if pk:
             try:

@@ -1,10 +1,10 @@
-import {SIGNUP_PROJECT_REQUEST,SIGNUP_PROJECT_SUCCESS,SIGNUP_PROJECT_FAIL, LOGIN_PROJECT_REQUEST, LOGIN_PROJECT_SUCCESS, LOGIN_PROJECT_FAIL, LOGOUT_PROJECT} from '../constants/projectConstants'
+import {SIGNUP_PROJECT_REQUEST,SIGNUP_PROJECT_SUCCESS,SIGNUP_PROJECT_FAIL, LOGIN_PROJECT_REQUEST, LOGIN_PROJECT_SUCCESS, LOGIN_PROJECT_FAIL, LOGOUT_PROJECT, GET_USERDETAIL_REQUEST, GET_USERDETAIL_SUCCESS, GET_USERDETAIL_FAIL} from '../constants/projectConstants'
 
 const initialState = {
     loading: false,
     userInfo: null,
     error: null,
-    };
+};
 
 
 export const signupProjectReducers = (state = initialState, action) => {
@@ -48,3 +48,25 @@ export const loginProjectReducers = (state = initialState2, action) => {
         return state;
     }
 };
+
+export const userDetailReducers = (state = {}, action) =>{
+  switch(action.type){
+      case GET_USERDETAIL_REQUEST:
+          return {
+              loading: true
+          }
+      case GET_USERDETAIL_SUCCESS:
+          return {
+              loading: false,
+              user: action.payload
+          }
+      case GET_USERDETAIL_FAIL:
+          return {
+              loading: false,
+              error: action.payload
+          }
+      default:
+          return state
+  }
+}
+

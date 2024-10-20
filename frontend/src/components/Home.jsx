@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
+import Card1 from './HomeCards/Card1';
+import Card2 from './HomeCards/Card2';
 
 const Home = () => {
   const [restaurantData, setRestaurantData] = useState({
@@ -117,7 +119,7 @@ const Home = () => {
 
   return (
     <div style={{ padding: '20px', maxWidth: '600px', margin: 'auto' }}>
-      <h2>Restaurant Data Form</h2>
+      <h2 className='font-bold text-3xl'>Restaurant Data Form</h2>
       <form onSubmit={handleSubmit}>
       <div style={{ marginBottom: '15px' }}>
         <label>Restaurant Name</label>
@@ -399,7 +401,7 @@ const Home = () => {
           style={{ display: 'block', width: '100%', padding: '10px', margin: '5px 0', border: '1px solid #ccc' }}
         />
       </div>
-      <h2> Transaction Data Form</h2>
+      <h2 className='font-bold text-3xl'> Transaction Data Form</h2>
       <div style={{ marginBottom: '15px' }}>
         <label>Order No</label>
         <input
@@ -933,6 +935,10 @@ const Home = () => {
       <button type="submit">Submit</button>
     </form>
     </div>
+    // <div className='flex justify-around mx-20 mt-10'>
+    //  <Card1/>
+    //  <Card2/>
+    // </div >
   );
 };
 
