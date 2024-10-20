@@ -1,33 +1,20 @@
-"""
-URL configuration for server project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
+# urls.py
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
-from inputs.views import RestaurantSalesViewSet,RestraurantTransactionsViewSet
+from inputs.views import RestaurantSalesViewSet, RestraurantTransactionsViewSet
 
+# from dashboard.views import SalesPredictionViewSet
 
 router = routers.DefaultRouter()
-router.register('restaurant-data', RestaurantSalesViewSet),
-router.register('restaurant-transactions', RestraurantTransactionsViewSet,basename='unique_basename'),
 
-
+router.register('restaurant-data', RestaurantSalesViewSet)
+router.register('restaurant-transactions', RestraurantTransactionsViewSet, basename='unique_basename')
+# router.register('sales-prediction', SalesPredictionViewSet, basename='sales-prediction')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('accounts.urls')),
-    path('api/', include(router.urls)),  
+    path('', include('accounts.urls')),
+    path('api/', include(router.urls)),
+    path('dashboard/', include('dashboard.urls'))
 ]
